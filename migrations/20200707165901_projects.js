@@ -26,9 +26,14 @@ exports.up = async function(knex) {
   });
 
   await knex.schema.createTable("projects_resources", tbl => {
-    tbl.integer("project_id").references("id").inTable("projects").onDelete("RESTRICT").onUpdate("CASCADE")
-    tbl.primary(["project_id", "resource_id"])
-  })
+    tbl
+      .integer("project_id")
+      .references("id")
+      .inTable("projects")
+      .onDelete("RESTRICT")
+      .onUpdate("CASCADE");
+    tbl.primary(["project_id", "resource_id"]);
+  });
 };
 
 exports.down = async function(knex) {
